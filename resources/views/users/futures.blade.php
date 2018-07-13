@@ -11,9 +11,9 @@
                     <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->name, 500) }}" alt="">
                 </div>
             </div>
-            @include('user_friend.friend_button', ['user' => $user])
-            @include('user_friend.zuttomo_button', ['user' => $user])
-            @include('user_friend.future_button', ['user' => $user])
+            @include('user_friends.friend_button', ['user' => $user])
+            @include('user_friends.zuttomo_button', ['user' => $user])
+            @include('user_friends.future_button', ['user' => $user])
             
         </aside>
         <div class="col-xs-10">
@@ -24,6 +24,9 @@
                 <li role="presentation" class="{{ Request::is('users/*/zuttomoings') ? 'active' : '' }}"><a href="{{ route('users.zuttomoings', ['id' => $user->id]) }}">ズッ友たち<span class="badge">{{ $count_zuttomoings }}</span></a></li>
             </ul>
             @include('users.users', ['users' => $users])
-        </div>
+          {!! Form::model($user, ['route' => ['queries.future', 'id' => $user->id], 'method' => 'get']) !!}
+           {!! Form::submit('更新する', ['class' => 'btn btn-primary']) !!}
+           {!! Form::close() !!}
+          </div>
     </div>
 @endsection

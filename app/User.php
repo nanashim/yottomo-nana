@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'hometeam','codingteam', 'password','future_id'
+        'name', 'hometeam','codingteam', 'password','future_id','friend_id'
     ];
 
     /**
@@ -34,12 +34,12 @@ class User extends Authenticatable
     
     public function friends()
     {
-        return $this->belongsToMany(User::class, 'user_friend', 'user_id', 'friend_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_friends', 'user_id', 'friend_id')->withTimestamps();
     }
     
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'user_friend', 'friend_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_friends', 'friend_id', 'user_id')->withTimestamps();
     }
     
     public function is_follower($userId) {
@@ -77,7 +77,7 @@ class User extends Authenticatable
     
     public function futurings()
     {
-        return $this->belongsToMany(User::class, 'user_friend', 'future_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_friends', 'future_id', 'user_id')->withTimestamps();
     }
     
    
@@ -88,16 +88,16 @@ class User extends Authenticatable
         
         // $user->futurings()->sync([8 => [future_id->267]);
         
-        // if($naritai && $nararetai) {
+        if($naritai && $nararetai) {
             // マッチング成立の時future_id=friend_idにしたい
-            $this->futurings()->attach($userId);
+            $this->futurings()->update($userId);
             
-        //     return true;
-        // } else {
-        //     // 不成立
+            return true;
+        } else {
+            // 不成立
            
-        //     return false;
-        // }
+            return false;
+        }
     }
     
     

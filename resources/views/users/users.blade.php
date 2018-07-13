@@ -22,8 +22,8 @@
                                         <p>{!! link_to_route('users.show', 'View profile', ['id' => $user->id]) !!}</p>
                                     </div>
                                     <div class="buttons">
-                                        @include('user_friend.friend_button', ['user' => $user])
-                                        @include('user_friend.zuttomo_button', ['user' => $user])
+                                        @include('user_friends.friend_button', ['user' => $user])
+                                        @include('user_friends.zuttomo_button', ['user' => $user])
                                     </div>
                                 </div>
                             </div>

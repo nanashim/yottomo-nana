@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="pull-right">
-                @include('user_friend.friend_button', ['user' => $user])
+                @include('user_friends.friend_button', ['user' => $user])
             </div>
         </aside>
         <div class="col-xs-10">

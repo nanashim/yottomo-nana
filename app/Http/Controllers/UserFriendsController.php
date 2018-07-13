@@ -4,13 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\UserFriends;
 
-class UserFriendController extends Controller
+class UserFriendsController extends Controller
 {
     // like store
     public function friend(Request $request, $id)
     {
+        // dd('llll');
         \Auth::user()->friend($id);
+        //自分がいいねした人が、イイねしている数を表示できた
+        $data = UserFriends::get(['user_id'])->where('user_id' ,'=', $id);
+        //自分がイイねした人がイイねしている人の、freind_idの数を表示したい
+        $data2 = UserFriends::where('user_id' ,'=', $id)->get(['friend_id']);
+        
+        $data->toArray();
+        $data2->toArray();
+        dd($data2);
+        
         return redirect()->back();
     }
     

@@ -12,7 +12,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $table = DB::table('user_friend');
+        $table = DB::table('user_friends');
         $users = User::paginate(20);
         
         return view('users.index', [

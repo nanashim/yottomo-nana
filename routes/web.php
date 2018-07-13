@@ -33,20 +33,21 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::group(['prefix' => 'users/{id}'], function () {
         // like
-        Route::post('friend', 'UserFriendController@friend')->name('user.friend');
-        Route::delete('unfriend', 'UserFriendController@unfriend')->name('user.unfriend');
+        Route::post('friend', 'UserFriendsController@friend')->name('user.friend');
+        Route::delete('unfriend', 'UserFriendsController@unfriend')->name('user.unfriend');
         Route::get('friends', 'UsersController@friends')->name('users.friends');
         
         // zuttomo
-        Route::post('zuttomo', 'UserFriendController@zuttomo')->name('user.zuttomo');
-        Route::delete('unzuttomo', 'UserFriendController@unzuttomo')->name('user.unzuttomo');
+        Route::post('zuttomo', 'UserFriendsController@zuttomo')->name('user.zuttomo');
+        Route::delete('unzuttomo', 'UserFriendsController@unzuttomo')->name('user.unzuttomo');
         Route::get('zuttomoings', 'UsersController@zuttomoings')->name('users.zuttomoings');
         
         //future
-        Route::post('future', 'UserFriendController@future')->name('user.future');
-        Route::delete('unfuture', 'UserFriendController@unfuture')->name('user.unfuture');
+        Route::post('future', 'UserFriendsController@future')->name('user.future');
+        Route::delete('unfuture', 'UserFriendsController@unfuture')->name('user.unfuture');
         Route::get('futurings', 'UsersController@futurings')->name('users.futurings');
         
+        Route::get('/queries', 'QueriesController@getIndex')->name('queries.future');
     });
     
     Route::resource('memos', 'MemosController', ['only' => ['store', 'destroy']]);

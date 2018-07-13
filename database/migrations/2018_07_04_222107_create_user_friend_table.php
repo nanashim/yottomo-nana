@@ -13,7 +13,7 @@ class CreateUserFriendTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_friend', function (Blueprint $table) {
+        Schema::create('user_friends', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('friend_id')->unsigned()->index()->nullable();
@@ -38,6 +38,6 @@ class CreateUserFriendTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_friend');
+        Schema::dropIfExists('user_friends');
     }
 }

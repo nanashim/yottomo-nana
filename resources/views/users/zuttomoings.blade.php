@@ -11,8 +11,8 @@
                     <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->name, 500) }}" alt="">
                 </div>
             </div>
-            @include('user_friend.friend_button', ['user' => $user])
-            @include('user_friend.zuttomo_button', ['user' => $user])
+            @include('user_friends.friend_button', ['user' => $user])
+            @include('user_friends.zuttomo_button', ['user' => $user])
         </aside>
         <div class="col-xs-10">
             <ul class="nav nav-tabs nav-justified">
