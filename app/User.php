@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'hometeam','codingteam', 'password',
+        'name', 'hometeam','codingteam', 'password','future_id'
     ];
 
     /**
@@ -36,6 +36,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'user_friend', 'user_id', 'friend_id')->withTimestamps();
     }
+    
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_friend', 'friend_id', 'user_id')->withTimestamps();
+    }
+    
+    public function is_follower($userId) {
+        return $this->followers()->where('friend_id', $userId)->exists();
+    }
+    
     
     public function friend($userId)
     {   
@@ -63,6 +73,35 @@ class User extends Authenticatable
             return true;
         }
     }
+    
+    
+    public function futurings()
+    {
+        return $this->belongsToMany(User::class, 'user_friend', 'future_id', 'user_id')->withTimestamps();
+    }
+    
+   
+    public function future($userId)
+    {
+        $naritai = $this->is_friending($userId);
+        $nararetai = $this->is_follower($userId);
+        
+        // $user->futurings()->sync([8 => [future_id->267]);
+        
+        // if($naritai && $nararetai) {
+            // マッチング成立の時future_id=friend_idにしたい
+            $this->futurings()->attach($userId);
+            
+        //     return true;
+        // } else {
+        //     // 不成立
+           
+        //     return false;
+        // }
+    }
+    
+    
+    
     
     public function unfriend($userId)
     {

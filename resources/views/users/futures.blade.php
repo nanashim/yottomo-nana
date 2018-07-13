@@ -13,6 +13,8 @@
             </div>
             @include('user_friend.friend_button', ['user' => $user])
             @include('user_friend.zuttomo_button', ['user' => $user])
+            @include('user_friend.future_button', ['user' => $user])
+            
         </aside>
         <div class="col-xs-10">
             <ul class="nav nav-tabs nav-justified">

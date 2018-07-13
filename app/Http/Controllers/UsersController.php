@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Memo;
+use DB;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
+        $table = DB::table('user_friend');
+        $users = User::paginate(20);
         
         return view('users.index', [
             'users' => $users,
@@ -22,10 +24,12 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $memos = $user->memos()->orderBy('created_at', 'desc')->paginate(10);
+        $futurings = $user->futurings()->paginate(20);
         
         $data = [
             'user' => $user,
             'memos' => $memos,
+            'users' => $futurings,
         ];
         
         $data += $this->counts($user);
@@ -81,5 +85,25 @@ class UsersController extends Controller
 
         return view('users.zuttomoings', $data);
     }
+    
+    
+
+    public function futurings(Request $request, $id)
+        {
+            $user = User::find($id);
+            //futurefuturingかわからない
+            $futurings = $user->futurings()->paginate(20);
+    
+            $data = [
+                'user' => $user,
+                'users' => $futurings,
+            ];
+    
+            $data += $this->counts($user);
+        
+            return view('users.futures', $data);
+        }
+        
+    
     
 }
